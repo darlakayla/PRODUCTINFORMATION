@@ -5,12 +5,24 @@
  */
 package productinformation;
 
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 
@@ -20,12 +32,27 @@ public class add_product extends javax.swing.JFrame {
     Statement st;
     PreparedStatement pst;
     ResultSet rs;
+    
+    public String destination = "";
+    File selectedFile;
+    public String oldpath;
+    String path;
+    
     public add_product() {
         initComponents();
     }
     
     
-    
+    public void reset(){
+             
+        product_name.setText("");
+        product_brand.setText(""); 
+         product_price.setText(""); 
+          product_quant.setText(""); 
+         image.setIcon(null);
+        
+        
+    }
     
      public Connection openConnection(){
     if(con == null){
@@ -50,33 +77,36 @@ public class add_product extends javax.swing.JFrame {
 
         }
      
-      public void addProduct(){
-        Connection openConnection  = openConnection();
+      public void addProduct(){  
         
         try{
-              pst = con.prepareStatement("INSERT INTO company_products VALUES(?,?,?,?,?,?)");
-              
-              pst.setInt(1,0);
-              pst.setString(2,product_name.getText().toString());
-              pst.setString(3,product_brand.getText().toString());
-              pst.setString(4,product_price.getText().toString());
-              pst.setString(5,product_qty.getText().toString());
-              pst.setString(6,product_category.getSelectedItem().toString());
-              
+              con = DriverManager.getConnection("jdbc:mysql://localhost:3306/productinformation", "root", "");
+            String sql = "INSERT INTO company_products ( product_name,product_brand, product_price,product_qty,product_category, img_pic)values (?,?,?,?,?,?)"; 
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, product_name.getText());
+            ps.setString(2, product_brand.getText());  
+            ps.setString(3, product_price.getText());
+             ps.setString(4, product_quant.getText());
+            ps.setString(5, product_category.getSelectedItem().toString());
+            ps.setString(6, destination);
+            ps.executeUpdate();           
+            Files.copy(selectedFile.toPath(), new File(destination).toPath(), StandardCopyOption.REPLACE_EXISTING);  
+              reset();
                
               
               
               if (product_name.getText().isEmpty() || product_brand.getText().isEmpty() || product_price.getText().isEmpty()){
-                 JOptionPane.showMessageDialog(this, "All fields are required");
+                 JOptionPane.showMessageDialog(null, "All fields are required");
              }
              
               else if(product_category.getSelectedItem().equals("Select a category")){
-                  JOptionPane.showMessageDialog(this, "Please Select Category");
+                  JOptionPane.showMessageDialog(null, "Please Select Category");
              }
              
              else{
-                  pst.executeUpdate();
-                 JOptionPane.showMessageDialog(this,"Save Succesfully");
+                  
+                 JOptionPane.showMessageDialog(null,"Save Succesfully");
+                 reset();
              }
             
             
@@ -88,12 +118,109 @@ public class add_product extends javax.swing.JFrame {
             System.out.println(e);   
         }
     }
+ public void imageUpdater(String existingFilePath, String newFilePath){
+        File existingFile = new File(existingFilePath);
+        if (existingFile.exists()) {
+            String parentDirectory = existingFile.getParent();
+            File newFile = new File(newFilePath);
+            String newFileName = newFile.getName();
+            File updatedFile = new File(parentDirectory, newFileName);
+            existingFile.delete();
+            try {
+                Files.copy(newFile.toPath(), updatedFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                System.out.println("Image updated successfully.");
+            } catch (IOException e) {
+                System.out.println("Error occurred while updating the image: ");
+            }
+        } else {
+            try{
+                Files.copy(selectedFile.toPath(), new File(destination).toPath(), StandardCopyOption.REPLACE_EXISTING);
+            }catch(IOException e){
+                System.out.println("Error on update!");
+            }
+        }
+   }
+ 
+        public static int getHeightFromWidth(String imagePath, int desiredWidth) {
+        try {
+            // Read the image file
+            File imageFile = new File(imagePath);
+            BufferedImage image = ImageIO.read(imageFile);
+            
+            // Get the original width and height of the image
+            int originalWidth = image.getWidth();
+            int originalHeight = image.getHeight();
+            
+            // Calculate the new height based on the desired width and the aspect ratio
+            int newHeight = (int) ((double) desiredWidth / originalWidth * originalHeight);
+            
+            return newHeight;
+        } catch (IOException ex) {
+            System.out.println("No image found!");
+        }
+        
+        return -1;
+    }
+        
+        public  ImageIcon ResizeImage(String ImagePath, byte[] pic, JLabel label) {
+    ImageIcon MyImage = null;
+        if(ImagePath !=null){
+            MyImage = new ImageIcon(ImagePath);
+        }else{
+            MyImage = new ImageIcon(pic);
+        }
+        
+    int newHeight = getHeightFromWidth(ImagePath, label.getWidth());
 
-    /**
-     * This method is called from within the constructor to initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is always
-     * regenerated by the Form Editor.
-     */
+    Image img = MyImage.getImage();
+    Image newImg = img.getScaledInstance(label.getWidth(), newHeight, Image.SCALE_SMOOTH);
+    ImageIcon image = new ImageIcon(newImg);
+    return image;
+}
+        
+         public int FileChecker(String path){
+        File file = new File(path);
+        String fileName = file.getName();
+        
+        Path filePath = Paths.get("src/image", fileName);
+        boolean fileExists = Files.exists(filePath);
+        
+        if (fileExists) {
+            return 1;
+        } else {
+            return 0;
+        }
+    
+    }
+            public void img(){
+    JFileChooser fileChooser = new JFileChooser();
+                int returnValue = fileChooser.showOpenDialog(null);
+                
+                
+                
+                if (returnValue == JFileChooser.APPROVE_OPTION) {
+                    try {
+                        selectedFile = fileChooser.getSelectedFile();
+                        destination = "src/img/" + selectedFile.getName();
+                        path  = selectedFile.getAbsolutePath();
+                        
+                        
+                        if(FileChecker(path) == 1){
+                          JOptionPane.showMessageDialog(null, "File Already Exist, Rename or Choose another!");
+                            destination = "";
+                            path="";
+                        }else{
+                            image.setIcon(ResizeImage(path, null, image));
+                            System.out.println(""+destination);
+                           browse.setVisible(true);
+                            
+                        }
+                    } catch (Exception ex) {
+                        JOptionPane.showMessageDialog(null, "FILE ERROR"+ex);
+                    }
+                }
+    
+            }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -111,15 +238,18 @@ public class add_product extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         product_price = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        product_qty = new javax.swing.JTextField();
+        product_quant = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         product_category = new javax.swing.JComboBox<>();
         add = new javax.swing.JButton();
         back1 = new javax.swing.JButton();
-        jLabel9 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        image = new javax.swing.JLabel();
+        browse = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(0, 204, 102));
         jPanel1.setLayout(null);
 
         jPanel2.setBackground(new java.awt.Color(51, 102, 255));
@@ -162,44 +292,44 @@ public class add_product extends javax.swing.JFrame {
         jLabel4.setForeground(new java.awt.Color(255, 255, 0));
         jLabel4.setText("PRODUCT NAME:");
         jPanel1.add(jLabel4);
-        jLabel4.setBounds(400, 60, 150, 40);
+        jLabel4.setBounds(400, 160, 150, 40);
         jPanel1.add(product_name);
-        product_name.setBounds(550, 60, 250, 40);
+        product_name.setBounds(550, 160, 250, 40);
 
         jLabel5.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 0));
         jLabel5.setText("PRODUCT BRAND:");
         jPanel1.add(jLabel5);
-        jLabel5.setBounds(400, 130, 150, 40);
+        jLabel5.setBounds(400, 210, 150, 40);
         jPanel1.add(product_brand);
-        product_brand.setBounds(550, 130, 250, 40);
+        product_brand.setBounds(550, 210, 250, 40);
 
         jLabel6.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 0));
         jLabel6.setText("PRODUCT PRICE:");
         jPanel1.add(jLabel6);
-        jLabel6.setBounds(400, 200, 150, 40);
+        jLabel6.setBounds(400, 260, 150, 40);
         jPanel1.add(product_price);
-        product_price.setBounds(550, 200, 250, 40);
+        product_price.setBounds(550, 260, 250, 40);
 
         jLabel7.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 0));
         jLabel7.setText("AVAILABLE  QTY.");
         jPanel1.add(jLabel7);
-        jLabel7.setBounds(400, 280, 150, 40);
-        jPanel1.add(product_qty);
-        product_qty.setBounds(550, 280, 250, 40);
+        jLabel7.setBounds(400, 310, 150, 40);
+        jPanel1.add(product_quant);
+        product_quant.setBounds(550, 310, 250, 40);
 
         jLabel8.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 0));
         jLabel8.setText("CATEGORY:");
         jPanel1.add(jLabel8);
-        jLabel8.setBounds(400, 350, 150, 40);
+        jLabel8.setBounds(400, 360, 150, 40);
 
         product_category.setFont(new java.awt.Font("Agency FB", 0, 18)); // NOI18N
         product_category.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select a category", "Drinks", "Gadgets", "Foods", "T-shirts", "Cosmetics", "Appliances", "Shoes", "Bicycles", " " }));
         jPanel1.add(product_category);
-        product_category.setBounds(550, 350, 250, 40);
+        product_category.setBounds(550, 360, 250, 40);
 
         add.setBackground(new java.awt.Color(255, 255, 51));
         add.setFont(new java.awt.Font("Tw Cen MT Condensed", 1, 18)); // NOI18N
@@ -224,9 +354,23 @@ public class add_product extends javax.swing.JFrame {
         jPanel1.add(back1);
         back1.setBounds(440, 430, 140, 40);
 
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/join-background.jpg"))); // NOI18N
-        jPanel1.add(jLabel9);
-        jLabel9.setBounds(344, -6, 510, 500);
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        image.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel3.add(image, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 130, 110));
+
+        jPanel1.add(jPanel3);
+        jPanel3.setBounds(650, 30, 130, 110);
+
+        browse.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        browse.setText("BROWSE");
+        browse.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                browseActionPerformed(evt);
+            }
+        });
+        jPanel1.add(browse);
+        browse.setBounds(530, 100, 100, 30);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -258,10 +402,14 @@ public class add_product extends javax.swing.JFrame {
        product_name.setText("");
        product_brand.setText("");
        product_price.setText("");
-       product_qty.setText("");
+       product_quant.setText("");
        product_category.setSelectedItem("Select a category");
       
     }//GEN-LAST:event_back1ActionPerformed
+
+    private void browseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseActionPerformed
+      img();
+    }//GEN-LAST:event_browseActionPerformed
 
     /**
      * @param args the command line arguments
@@ -302,6 +450,8 @@ public class add_product extends javax.swing.JFrame {
     private javax.swing.JButton add;
     private javax.swing.JButton back;
     private javax.swing.JButton back1;
+    private javax.swing.JButton browse;
+    private javax.swing.JLabel image;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -310,13 +460,13 @@ public class add_product extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JTextField product_brand;
     private javax.swing.JComboBox<String> product_category;
     private javax.swing.JTextField product_name;
     private javax.swing.JTextField product_price;
-    private javax.swing.JTextField product_qty;
+    private javax.swing.JTextField product_quant;
     // End of variables declaration//GEN-END:variables
 }
