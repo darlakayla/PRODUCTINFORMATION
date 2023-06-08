@@ -65,7 +65,7 @@ public class adminRegistration extends javax.swing.JFrame {
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Agency FB", 3, 48)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 0));
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("ADMIN REGISTRATION");
         jPanel1.add(jLabel1);
@@ -79,37 +79,37 @@ public class adminRegistration extends javax.swing.JFrame {
         jPanel1.add(contact);
         contact.setBounds(140, 280, 220, 40);
 
-        jLabel2.setFont(new java.awt.Font("Agency FB", 0, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 0));
-        jLabel2.setText("Email;");
+        jLabel2.setFont(new java.awt.Font("Centaur", 3, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Email:");
         jPanel1.add(jLabel2);
         jLabel2.setBounds(40, 210, 100, 40);
         jPanel1.add(email);
         email.setBounds(140, 210, 220, 40);
 
-        jLabel3.setFont(new java.awt.Font("Agency FB", 0, 24)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 0));
-        jLabel3.setText("Contact;");
+        jLabel3.setFont(new java.awt.Font("Centaur", 3, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Contact:");
         jPanel1.add(jLabel3);
         jLabel3.setBounds(40, 280, 100, 40);
         jPanel1.add(username);
         username.setBounds(140, 140, 220, 40);
 
-        jLabel4.setFont(new java.awt.Font("Agency FB", 0, 24)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 0));
-        jLabel4.setText("Username;");
+        jLabel4.setFont(new java.awt.Font("Centaur", 3, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Username:");
         jPanel1.add(jLabel4);
         jLabel4.setBounds(40, 140, 100, 40);
 
-        jLabel5.setFont(new java.awt.Font("Agency FB", 0, 24)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 0));
+        jLabel5.setFont(new java.awt.Font("Centaur", 3, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Password:");
         jPanel1.add(jLabel5);
         jLabel5.setBounds(380, 210, 90, 40);
 
-        jLabel6.setFont(new java.awt.Font("Agency FB", 0, 24)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 0));
-        jLabel6.setText("Name;");
+        jLabel6.setFont(new java.awt.Font("Centaur", 3, 18)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("Name:");
         jPanel1.add(jLabel6);
         jLabel6.setBounds(380, 140, 90, 40);
 
@@ -121,8 +121,8 @@ public class adminRegistration extends javax.swing.JFrame {
         jPanel1.add(name);
         name.setBounds(480, 140, 250, 40);
 
-        jButton3.setBackground(new java.awt.Color(255, 255, 51));
-        jButton3.setFont(new java.awt.Font("Tw Cen MT Condensed", 1, 18)); // NOI18N
+        jButton3.setBackground(new java.awt.Color(255, 255, 255));
+        jButton3.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
         jButton3.setText("BACK");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -130,10 +130,10 @@ public class adminRegistration extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton3);
-        jButton3.setBounds(20, 420, 130, 29);
+        jButton3.setBounds(20, 420, 130, 31);
 
-        register.setBackground(new java.awt.Color(255, 255, 51));
-        register.setFont(new java.awt.Font("Tw Cen MT Condensed", 1, 18)); // NOI18N
+        register.setBackground(new java.awt.Color(255, 255, 255));
+        register.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
         register.setText("REGISTER");
         register.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -146,7 +146,7 @@ public class adminRegistration extends javax.swing.JFrame {
         password.setBounds(480, 210, 250, 40);
 
         jLabel8.setFont(new java.awt.Font("Yu Gothic", 1, 24)); // NOI18N
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/join-background.jpg"))); // NOI18N
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/01 (4).jpg"))); // NOI18N
         jPanel1.add(jLabel8);
         jLabel8.setBounds(-10, -10, 770, 510);
 

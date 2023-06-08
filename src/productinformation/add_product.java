@@ -19,6 +19,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
@@ -39,8 +42,10 @@ public class add_product extends javax.swing.JFrame {
     String path;
     
     public add_product() {
+        
         initComponents();
     }
+    
     
     
     public void reset(){
@@ -77,6 +82,7 @@ public class add_product extends javax.swing.JFrame {
 
         }
      
+     
       public void addProduct(){  
         
         try{
@@ -95,8 +101,8 @@ public class add_product extends javax.swing.JFrame {
                
               
               
-              if (product_name.getText().isEmpty() || product_brand.getText().isEmpty() || product_price.getText().isEmpty()){
-                 JOptionPane.showMessageDialog(null, "All fields are required");
+              if (product_name.getText().isEmpty() || product_brand.getText().isEmpty() || product_price.getText().isEmpty() || product_quant.getText().isEmpty()){
+                 JOptionPane.showMessageDialog(null, "Save Succesfully");
              }
              
               else if(product_category.getSelectedItem().equals("Select a category")){
@@ -249,32 +255,32 @@ public class add_product extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(0, 204, 102));
+        jPanel1.setBackground(new java.awt.Color(255, 204, 204));
         jPanel1.setLayout(null);
 
-        jPanel2.setBackground(new java.awt.Color(51, 102, 255));
+        jPanel2.setBackground(new java.awt.Color(255, 153, 153));
         jPanel2.setLayout(null);
 
-        jLabel1.setFont(new java.awt.Font("Algerian", 1, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 0));
+        jLabel1.setFont(new java.awt.Font("Agency FB", 1, 48)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("SYSTEM");
         jPanel2.add(jLabel1);
-        jLabel1.setBounds(100, 270, 160, 40);
+        jLabel1.setBounds(100, 270, 170, 40);
 
-        jLabel2.setFont(new java.awt.Font("Algerian", 1, 36)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 0));
+        jLabel2.setFont(new java.awt.Font("Agency FB", 1, 48)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("PRODUCT");
         jPanel2.add(jLabel2);
-        jLabel2.setBounds(90, 150, 180, 40);
+        jLabel2.setBounds(90, 170, 190, 40);
 
-        jLabel3.setFont(new java.awt.Font("Algerian", 1, 36)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 0));
+        jLabel3.setFont(new java.awt.Font("Agency FB", 1, 48)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("INFORMATION");
         jPanel2.add(jLabel3);
-        jLabel3.setBounds(50, 210, 250, 40);
+        jLabel3.setBounds(70, 220, 230, 40);
 
-        back.setBackground(new java.awt.Color(255, 255, 51));
-        back.setFont(new java.awt.Font("Tw Cen MT Condensed", 1, 18)); // NOI18N
+        back.setBackground(new java.awt.Color(255, 255, 255));
+        back.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
         back.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/back.PNG"))); // NOI18N
         back.setText("BACK");
         back.addActionListener(new java.awt.event.ActionListener() {
@@ -289,7 +295,7 @@ public class add_product extends javax.swing.JFrame {
         jPanel2.setBounds(0, 0, 350, 500);
 
         jLabel4.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 0));
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("PRODUCT NAME:");
         jPanel1.add(jLabel4);
         jLabel4.setBounds(400, 160, 150, 40);
@@ -297,7 +303,7 @@ public class add_product extends javax.swing.JFrame {
         product_name.setBounds(550, 160, 250, 40);
 
         jLabel5.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 0));
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("PRODUCT BRAND:");
         jPanel1.add(jLabel5);
         jLabel5.setBounds(400, 210, 150, 40);
@@ -305,7 +311,7 @@ public class add_product extends javax.swing.JFrame {
         product_brand.setBounds(550, 210, 250, 40);
 
         jLabel6.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 0));
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("PRODUCT PRICE:");
         jPanel1.add(jLabel6);
         jLabel6.setBounds(400, 260, 150, 40);
@@ -313,7 +319,7 @@ public class add_product extends javax.swing.JFrame {
         product_price.setBounds(550, 260, 250, 40);
 
         jLabel7.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 0));
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("AVAILABLE  QTY.");
         jPanel1.add(jLabel7);
         jLabel7.setBounds(400, 310, 150, 40);
@@ -321,7 +327,7 @@ public class add_product extends javax.swing.JFrame {
         product_quant.setBounds(550, 310, 250, 40);
 
         jLabel8.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(255, 255, 0));
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("CATEGORY:");
         jPanel1.add(jLabel8);
         jLabel8.setBounds(400, 360, 150, 40);
@@ -331,8 +337,8 @@ public class add_product extends javax.swing.JFrame {
         jPanel1.add(product_category);
         product_category.setBounds(550, 360, 250, 40);
 
-        add.setBackground(new java.awt.Color(255, 255, 51));
-        add.setFont(new java.awt.Font("Tw Cen MT Condensed", 1, 18)); // NOI18N
+        add.setBackground(new java.awt.Color(255, 255, 255));
+        add.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
         add.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/addProduct.PNG"))); // NOI18N
         add.setText("ADD PRODUCT");
         add.addActionListener(new java.awt.event.ActionListener() {
@@ -343,8 +349,8 @@ public class add_product extends javax.swing.JFrame {
         jPanel1.add(add);
         add.setBounds(590, 430, 210, 40);
 
-        back1.setBackground(new java.awt.Color(255, 255, 51));
-        back1.setFont(new java.awt.Font("Tw Cen MT Condensed", 1, 18)); // NOI18N
+        back1.setBackground(new java.awt.Color(255, 255, 255));
+        back1.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
         back1.setText("CLEAR");
         back1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -362,7 +368,7 @@ public class add_product extends javax.swing.JFrame {
         jPanel1.add(jPanel3);
         jPanel3.setBounds(650, 30, 130, 110);
 
-        browse.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        browse.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
         browse.setText("BROWSE");
         browse.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

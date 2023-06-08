@@ -57,8 +57,8 @@ public class LOGINFORM extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(51, 51, 255));
         jPanel1.setLayout(null);
 
-        jLabel1.setFont(new java.awt.Font("Agency FB", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 0));
+        jLabel1.setFont(new java.awt.Font("Centaur", 3, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("PASSWORD:");
         jPanel1.add(jLabel1);
         jLabel1.setBounds(140, 300, 120, 40);
@@ -73,8 +73,8 @@ public class LOGINFORM extends javax.swing.JFrame {
         jPanel1.add(jLabel2);
         jLabel2.setBounds(240, 70, 160, 150);
 
-        back.setBackground(new java.awt.Color(255, 0, 255));
-        back.setFont(new java.awt.Font("Tw Cen MT Condensed", 1, 18)); // NOI18N
+        back.setBackground(new java.awt.Color(153, 153, 153));
+        back.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
         back.setText("BACK");
         back.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -84,8 +84,8 @@ public class LOGINFORM extends javax.swing.JFrame {
         jPanel1.add(back);
         back.setBounds(340, 370, 110, 40);
 
-        login.setBackground(new java.awt.Color(255, 0, 255));
-        login.setFont(new java.awt.Font("Tw Cen MT Condensed", 1, 18)); // NOI18N
+        login.setBackground(new java.awt.Color(153, 153, 153));
+        login.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
         login.setText("LOGIN");
         login.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -95,23 +95,23 @@ public class LOGINFORM extends javax.swing.JFrame {
         jPanel1.add(login);
         login.setBounds(220, 370, 110, 40);
 
-        jLabel4.setFont(new java.awt.Font("Agency FB", 1, 24)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 0));
+        jLabel4.setFont(new java.awt.Font("Centaur", 3, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("USERNAME:");
         jPanel1.add(jLabel4);
         jLabel4.setBounds(140, 240, 120, 40);
 
         jLabel5.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel5.setFont(new java.awt.Font("Agency FB", 3, 36)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 0));
+        jLabel5.setFont(new java.awt.Font("Centaur", 1, 24)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("LOGIN");
         jPanel1.add(jLabel5);
-        jLabel5.setBounds(0, 10, 640, 44);
+        jLabel5.setBounds(10, 10, 90, 40);
 
         jLabel3.setFont(new java.awt.Font("Agency FB", 1, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 0));
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/best-camera-product-photography.jpg"))); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/01 (2).jpg"))); // NOI18N
         jPanel1.add(jLabel3);
         jLabel3.setBounds(0, 0, 640, 460);
 

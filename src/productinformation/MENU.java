@@ -51,14 +51,14 @@ public class MENU extends javax.swing.JFrame {
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 51));
         jLabel1.setFont(new java.awt.Font("Agency FB", 1, 55)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 0));
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("INFORMATION SYSTEM");
         jPanel1.add(jLabel1);
         jLabel1.setBounds(0, 190, 600, 70);
 
-        jButton1.setBackground(new java.awt.Color(255, 255, 51));
-        jButton1.setFont(new java.awt.Font("Tw Cen MT Condensed", 1, 18)); // NOI18N
+        jButton1.setBackground(new java.awt.Color(255, 255, 255));
+        jButton1.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
         jButton1.setText("EXIT");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -68,8 +68,8 @@ public class MENU extends javax.swing.JFrame {
         jPanel1.add(jButton1);
         jButton1.setBounds(500, 390, 80, 30);
 
-        jButton2.setBackground(new java.awt.Color(255, 255, 51));
-        jButton2.setFont(new java.awt.Font("Tw Cen MT Condensed", 1, 18)); // NOI18N
+        jButton2.setBackground(new java.awt.Color(255, 255, 255));
+        jButton2.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
         jButton2.setText("LOGIN ");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -79,8 +79,8 @@ public class MENU extends javax.swing.JFrame {
         jPanel1.add(jButton2);
         jButton2.setBounds(30, 350, 190, 30);
 
-        jButton3.setBackground(new java.awt.Color(255, 255, 51));
-        jButton3.setFont(new java.awt.Font("Tw Cen MT Condensed", 1, 18)); // NOI18N
+        jButton3.setBackground(new java.awt.Color(255, 255, 255));
+        jButton3.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
         jButton3.setText("REGISTRATION");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -91,14 +91,14 @@ public class MENU extends javax.swing.JFrame {
         jButton3.setBounds(30, 390, 190, 30);
 
         jLabel3.setFont(new java.awt.Font("Agency FB", 3, 48)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 0));
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("PRODUCT ");
         jPanel1.add(jLabel3);
         jLabel3.setBounds(0, 140, 600, 60);
 
         jLabel2.setFont(new java.awt.Font("Yu Gothic", 1, 36)); // NOI18N
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/best-camera-product-photography.jpg"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/01 (3).jpg"))); // NOI18N
         jPanel1.add(jLabel2);
         jLabel2.setBounds(0, -30, 610, 490);
 

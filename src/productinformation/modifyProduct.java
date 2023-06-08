@@ -6,13 +6,18 @@
 package productinformation;
 
 import static com.sun.xml.internal.fastinfoset.alphabet.BuiltInRestrictedAlphabets.table;
+import java.awt.print.PageFormat;
+import java.awt.print.PrinterException;
+import java.awt.print.PrinterJob;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.MessageFormat;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -192,10 +197,11 @@ return con;
         delete = new javax.swing.JButton();
         refresh = new javax.swing.JButton();
         filter = new javax.swing.JComboBox<>();
-        jLabel1 = new javax.swing.JLabel();
+        print = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel2.setBackground(new java.awt.Color(255, 204, 204));
         jPanel2.setLayout(null);
 
         product_table.setModel(new javax.swing.table.DefaultTableModel(
@@ -217,14 +223,14 @@ return con;
         jScrollPane1.setBounds(60, 30, 750, 300);
 
         jLabel11.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(255, 255, 0));
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel11.setText("PRODUCT ID");
         jPanel2.add(jLabel11);
         jLabel11.setBounds(60, 390, 220, 40);
 
         jLabel6.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 0));
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("PRODUCT PRICE");
         jPanel2.add(jLabel6);
@@ -237,14 +243,14 @@ return con;
         product_price.setBounds(320, 430, 210, 40);
 
         jLabel4.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 0));
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("PRODUCT NAME");
         jPanel2.add(jLabel4);
         jLabel4.setBounds(60, 480, 220, 40);
 
         jLabel7.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 0));
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("AVAILABLE  QTY.");
         jPanel2.add(jLabel7);
@@ -255,14 +261,14 @@ return con;
         product_qty.setBounds(320, 520, 210, 40);
 
         jLabel12.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(255, 255, 0));
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel12.setText("PRODUCT BRAND");
         jPanel2.add(jLabel12);
         jLabel12.setBounds(580, 390, 210, 40);
 
         jLabel8.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(255, 255, 0));
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("CATEGORY");
         jPanel2.add(jLabel8);
@@ -281,8 +287,8 @@ return con;
         jPanel2.add(product_category);
         product_category.setBounds(580, 520, 210, 40);
 
-        back.setBackground(new java.awt.Color(255, 255, 51));
-        back.setFont(new java.awt.Font("Tw Cen MT Condensed", 1, 18)); // NOI18N
+        back.setBackground(new java.awt.Color(255, 255, 255));
+        back.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
         back.setText("BACK");
         back.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -292,8 +298,8 @@ return con;
         jPanel2.add(back);
         back.setBounds(830, 230, 110, 40);
 
-        update.setBackground(new java.awt.Color(255, 255, 51));
-        update.setFont(new java.awt.Font("Tw Cen MT Condensed", 1, 18)); // NOI18N
+        update.setBackground(new java.awt.Color(255, 255, 255));
+        update.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
         update.setText("UPDATE");
         update.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -303,8 +309,8 @@ return con;
         jPanel2.add(update);
         update.setBounds(830, 80, 110, 40);
 
-        delete.setBackground(new java.awt.Color(255, 255, 51));
-        delete.setFont(new java.awt.Font("Tw Cen MT Condensed", 1, 18)); // NOI18N
+        delete.setBackground(new java.awt.Color(255, 255, 255));
+        delete.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
         delete.setText("DELETE");
         delete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -314,8 +320,8 @@ return con;
         jPanel2.add(delete);
         delete.setBounds(830, 130, 110, 40);
 
-        refresh.setBackground(new java.awt.Color(255, 255, 51));
-        refresh.setFont(new java.awt.Font("Tw Cen MT Condensed", 1, 18)); // NOI18N
+        refresh.setBackground(new java.awt.Color(255, 255, 255));
+        refresh.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
         refresh.setText("REFRESH");
         refresh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -339,9 +345,16 @@ return con;
         jPanel2.add(filter);
         filter.setBounds(60, 340, 190, 30);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/join-background.jpg"))); // NOI18N
-        jPanel2.add(jLabel1);
-        jLabel1.setBounds(-6, -6, 980, 590);
+        print.setBackground(new java.awt.Color(255, 255, 255));
+        print.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
+        print.setText("PRINT");
+        print.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                printActionPerformed(evt);
+            }
+        });
+        jPanel2.add(print);
+        print.setBounds(830, 280, 110, 40);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -392,6 +405,31 @@ return con;
         filter(qry);    
     }//GEN-LAST:event_filterItemStateChanged
 
+    private void printActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printActionPerformed
+       MessageFormat header = new MessageFormat("PRODUCTS LIST");
+       MessageFormat footer = new MessageFormat("Page {0, number, integer}");
+
+       PrinterJob printerJob = PrinterJob.getPrinterJob();
+
+       if (printerJob.printDialog()) {
+        PageFormat pageFormat = printerJob.defaultPage();
+        pageFormat.setOrientation(PageFormat.LANDSCAPE);
+
+        // Set the page margins to fit the entire table on one page
+        double margin = 36; // 1 inch margin
+        double width = pageFormat.getImageableWidth() - 2 * margin;
+        double height = pageFormat.getImageableHeight() - 2 * margin;
+
+        product_table.setSize((int) width, (int) height);
+
+        try {
+            product_table.print(JTable.PrintMode.FIT_WIDTH, header, footer);
+        } catch (PrinterException e) {
+            System.err.format("Printer error: %s%n", e.getMessage());
+        }
+    }
+    }//GEN-LAST:event_printActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -432,7 +470,6 @@ return con;
     private javax.swing.JButton back;
     private javax.swing.JButton delete;
     private javax.swing.JComboBox<String> filter;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel4;
@@ -441,6 +478,7 @@ return con;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton print;
     private javax.swing.JTextField product_brand;
     private javax.swing.JComboBox<String> product_category;
     private javax.swing.JTextField product_name;

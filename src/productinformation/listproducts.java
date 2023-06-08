@@ -325,32 +325,32 @@ System.out.println(e);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(0, 153, 51));
+        jPanel1.setBackground(new java.awt.Color(255, 204, 204));
         jPanel1.setLayout(null);
 
-        jPanel2.setBackground(new java.awt.Color(51, 102, 255));
+        jPanel2.setBackground(new java.awt.Color(255, 153, 153));
         jPanel2.setLayout(null);
 
-        jLabel1.setFont(new java.awt.Font("Algerian", 1, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 0));
+        jLabel1.setFont(new java.awt.Font("Agency FB", 1, 48)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("SYSTEM");
         jPanel2.add(jLabel1);
-        jLabel1.setBounds(100, 320, 180, 40);
+        jLabel1.setBounds(110, 320, 130, 40);
 
-        jLabel3.setFont(new java.awt.Font("Algerian", 1, 36)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 0));
+        jLabel3.setFont(new java.awt.Font("Agency FB", 1, 48)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("INFORMATION");
         jPanel2.add(jLabel3);
-        jLabel3.setBounds(50, 270, 260, 40);
+        jLabel3.setBounds(70, 270, 220, 40);
 
-        jLabel10.setFont(new java.awt.Font("Algerian", 1, 36)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(255, 255, 0));
+        jLabel10.setFont(new java.awt.Font("Agency FB", 1, 48)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("PRODUCT");
         jPanel2.add(jLabel10);
-        jLabel10.setBounds(100, 220, 170, 40);
+        jLabel10.setBounds(100, 220, 150, 40);
 
-        back.setBackground(new java.awt.Color(255, 255, 51));
-        back.setFont(new java.awt.Font("Tw Cen MT Condensed", 1, 18)); // NOI18N
+        back.setBackground(new java.awt.Color(255, 255, 255));
+        back.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
         back.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/back.PNG"))); // NOI18N
         back.setText("BACK");
         back.addActionListener(new java.awt.event.ActionListener() {
@@ -359,37 +359,37 @@ System.out.println(e);
             }
         });
         jPanel2.add(back);
-        back.setBounds(0, 0, 130, 50);
+        back.setBounds(20, 10, 120, 50);
 
         jPanel1.add(jPanel2);
         jPanel2.setBounds(0, 0, 350, 680);
 
         jLabel4.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 0));
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("PRODUCT NAME");
         jPanel1.add(jLabel4);
-        jLabel4.setBounds(410, 350, 230, 40);
+        jLabel4.setBounds(470, 340, 230, 40);
         jPanel1.add(product_name);
-        product_name.setBounds(410, 390, 230, 40);
+        product_name.setBounds(470, 380, 230, 40);
 
         jLabel6.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 0));
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("PRODUCT PRICE");
         jPanel1.add(jLabel6);
-        jLabel6.setBounds(760, 250, 230, 40);
+        jLabel6.setBounds(740, 240, 230, 40);
         jPanel1.add(product_price);
-        product_price.setBounds(760, 290, 230, 40);
+        product_price.setBounds(740, 280, 230, 40);
 
         jLabel7.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 0));
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("AVAILABLE  QTY.");
         jPanel1.add(jLabel7);
-        jLabel7.setBounds(760, 350, 230, 40);
+        jLabel7.setBounds(740, 340, 230, 40);
         jPanel1.add(product_quant);
-        product_quant.setBounds(760, 390, 230, 40);
+        product_quant.setBounds(740, 380, 230, 40);
 
         product_table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -407,34 +407,34 @@ System.out.println(e);
         jScrollPane1.setViewportView(product_table);
 
         jPanel1.add(jScrollPane1);
-        jScrollPane1.setBounds(550, 0, 440, 230);
+        jScrollPane1.setBounds(550, 10, 440, 220);
 
         jLabel11.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(255, 255, 0));
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel11.setText("PRODUCT ID");
         jPanel1.add(jLabel11);
-        jLabel11.setBounds(410, 250, 230, 40);
+        jLabel11.setBounds(470, 240, 230, 40);
 
         ID.setEditable(false);
         jPanel1.add(ID);
-        ID.setBounds(410, 290, 230, 40);
+        ID.setBounds(470, 280, 230, 40);
         jPanel1.add(product_brand);
-        product_brand.setBounds(410, 500, 230, 40);
+        product_brand.setBounds(470, 490, 230, 40);
 
         jLabel8.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(255, 255, 0));
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("CATEGORY");
         jPanel1.add(jLabel8);
-        jLabel8.setBounds(770, 450, 230, 40);
+        jLabel8.setBounds(750, 450, 230, 40);
 
         jLabel12.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(255, 255, 0));
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel12.setText("PRODUCT BRAND");
         jPanel1.add(jLabel12);
-        jLabel12.setBounds(410, 450, 230, 40);
+        jLabel12.setBounds(470, 450, 230, 40);
 
         panelimg.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -444,9 +444,9 @@ System.out.println(e);
         jPanel1.add(panelimg);
         panelimg.setBounds(400, 20, 130, 120);
         jPanel1.add(product_category);
-        product_category.setBounds(760, 500, 230, 40);
+        product_category.setBounds(750, 490, 230, 40);
 
-        update.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        update.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
         update.setText("UPDATE");
         update.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -454,9 +454,9 @@ System.out.println(e);
             }
         });
         jPanel1.add(update);
-        update.setBounds(420, 180, 90, 23);
+        update.setBounds(420, 180, 90, 31);
 
-        browse.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        browse.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
         browse.setText("BROWSE");
         browse.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -464,7 +464,7 @@ System.out.println(e);
             }
         });
         jPanel1.add(browse);
-        browse.setBounds(420, 150, 90, 23);
+        browse.setBounds(420, 150, 90, 31);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
