@@ -6,8 +6,11 @@
 package productinformation;
 
 import config.dbconnector;
+import java.awt.Component;
+import java.awt.Font;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.awt.print.PrinterException;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -20,6 +23,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
@@ -300,10 +305,10 @@ System.out.println(e);
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
         back = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        area1 = new javax.swing.JTextArea();
+        jButton1 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         product_name = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
@@ -331,24 +336,6 @@ System.out.println(e);
         jPanel2.setBackground(new java.awt.Color(255, 153, 153));
         jPanel2.setLayout(null);
 
-        jLabel1.setFont(new java.awt.Font("Agency FB", 1, 48)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("SYSTEM");
-        jPanel2.add(jLabel1);
-        jLabel1.setBounds(110, 320, 130, 40);
-
-        jLabel3.setFont(new java.awt.Font("Agency FB", 1, 48)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("INFORMATION");
-        jPanel2.add(jLabel3);
-        jLabel3.setBounds(70, 270, 220, 40);
-
-        jLabel10.setFont(new java.awt.Font("Agency FB", 1, 48)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel10.setText("PRODUCT");
-        jPanel2.add(jLabel10);
-        jLabel10.setBounds(100, 220, 150, 40);
-
         back.setBackground(new java.awt.Color(255, 255, 255));
         back.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
         back.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/back.PNG"))); // NOI18N
@@ -360,6 +347,23 @@ System.out.println(e);
         });
         jPanel2.add(back);
         back.setBounds(20, 10, 120, 50);
+
+        area1.setColumns(20);
+        area1.setRows(5);
+        jScrollPane2.setViewportView(area1);
+
+        jPanel2.add(jScrollPane2);
+        jScrollPane2.setBounds(50, 90, 250, 320);
+
+        jButton1.setFont(new java.awt.Font("Agency FB", 1, 18)); // NOI18N
+        jButton1.setText("PRINT");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jButton1);
+        jButton1.setBounds(223, 420, 80, 30);
 
         jPanel1.add(jPanel2);
         jPanel2.setBounds(0, 0, 350, 680);
@@ -490,6 +494,52 @@ System.out.println(e);
 
     private void product_tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_product_tableMouseClicked
        table(); 
+       
+     int selectedRow = product_table.getSelectedRow();
+
+    if (selectedRow != -1) {
+        try {
+            DefaultTableModel model = (DefaultTableModel) product_table.getModel();
+            int columnCount = model.getColumnCount();
+            StringBuilder rowData = new StringBuilder();
+
+            // Append data for selected row
+             String[] columnHeaders = {"Name", "Brand", "Price", "Availability", "Category" };
+            String[] rowDataValues = new String[columnCount];
+
+            for (int column = 0; column < columnCount; column++) {
+                rowDataValues[column] = model.getValueAt(selectedRow, column).toString();
+            }
+
+            String header = "PRODUCT INFORMATION SYSTEM\n\n";
+
+            String details = "Product Details:\n\n\n";
+            rowData.append(header);
+            rowData.append(details);
+
+            for (int i = 0; i < columnHeaders.length; i++) {
+                rowData.append(columnHeaders[i]).append(": ").append(rowDataValues[i]).append("\n");
+                rowData.append("\n"); // Add spacing after each detail
+            }
+          
+            area1.setText(rowData.toString());
+
+            // Center align the text in the JTextArea
+            area1.setAlignmentX(Component.CENTER_ALIGNMENT);
+            area1.setAlignmentY(Component.CENTER_ALIGNMENT);
+
+            // Set the font style and size
+            Font font = new Font("Times New Roman", Font.PLAIN, 13);
+            area1.setFont(font);
+           
+            // Print the JTextArea content
+          
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    } else {
+        JOptionPane.showMessageDialog(null, "No row selected.");
+    }
     }//GEN-LAST:event_product_tableMouseClicked
 
     private void updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateActionPerformed
@@ -499,6 +549,14 @@ System.out.println(e);
     private void browseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseActionPerformed
        img();
     }//GEN-LAST:event_browseActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        try {
+            area1.print();
+        } catch (PrinterException ex) {
+            Logger.getLogger(listproducts.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -537,14 +595,13 @@ System.out.println(e);
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField ID;
+    private javax.swing.JTextArea area1;
     private javax.swing.JButton back;
     private javax.swing.JButton browse;
     private javax.swing.JLabel image;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -552,6 +609,7 @@ System.out.println(e);
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JPanel panelimg;
     private javax.swing.JTextField product_brand;
     private javax.swing.JTextField product_category;
