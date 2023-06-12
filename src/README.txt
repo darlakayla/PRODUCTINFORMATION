@@ -1,0 +1,6 @@
+DATABASE: MYSQL
+SERVER: Apache
+DBMS: XAmpp
+
+JAR FILES:
+- rs2xml
